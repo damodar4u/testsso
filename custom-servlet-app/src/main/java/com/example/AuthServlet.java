@@ -1,6 +1,9 @@
 package com.example;
 
 import com.microsoft.aad.msal4j.*;
+import com.nimbusds.jwt.JWTParser;
+import com.nimbusds.jwt.SignedJWT;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Collections;
+import java.util.List;
 
 @WebServlet(name = "AuthServlet", urlPatterns = "/auth/redirect")
 public class AuthServlet extends HttpServlet {
@@ -34,7 +38,12 @@ public class AuthServlet extends HttpServlet {
                     .build();
 
             IAuthenticationResult result = app.acquireToken(params).get();
-            req.getSession().setAttribute("roles", result.claims().get("roles"));
+
+            // Parse ID token to get roles claim
+            SignedJWT idToken = (SignedJWT) JWTParser.parse(result.idToken());
+            List<String> roles = idToken.getJWTClaimsSet().getStringListClaim("roles");
+
+            req.getSession().setAttribute("roles", roles);
             resp.sendRedirect("/home.jsp");
         } catch (Exception e) {
             throw new ServletException("Token exchange failed", e);
