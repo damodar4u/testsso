@@ -13,14 +13,14 @@
     </properties>
 
     <dependencies>
-        <!-- MSAL4J Dependency -->
+        <!-- MSAL4J Dependency for Azure AD integration -->
         <dependency>
             <groupId>com.microsoft.azure</groupId>
             <artifactId>msal4j</artifactId>
             <version>1.13.2</version>
         </dependency>
 
-        <!-- Servlet API -->
+        <!-- Servlet API for Java Servlets -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -28,7 +28,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- JSP API -->
+        <!-- JSP API for Java Server Pages -->
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>javax.servlet.jsp-api</artifactId>
@@ -36,14 +36,21 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- JSTL (for JSP support) -->
+        <!-- JSTL for JSP tag support -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
 
-        <!-- Logging (Optional but Recommended) -->
+        <!-- Nimbus JOSE + JWT for parsing JWT tokens -->
+        <dependency>
+            <groupId>com.nimbusds</groupId>
+            <artifactId>nimbus-jose-jwt</artifactId>
+            <version>9.1.3</version>
+        </dependency>
+
+        <!-- Logging (Optional but recommended for debugging) -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
